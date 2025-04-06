@@ -17,7 +17,7 @@ aws guardduty create-sample-findings \
   --detector-id $(aws guardduty list-detectors --query 'DetectorIds[0]' --output text) \
   --finding-types UnauthorizedAccess:EC2/SSHBruteForce \
   --region us-east-1
-
+```
 ---
 
 ## 🖼️ Screenshots: Simulation & Findings
