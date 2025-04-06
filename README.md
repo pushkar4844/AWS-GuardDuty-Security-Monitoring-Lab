@@ -2,7 +2,7 @@
 
 ### 🛡️ AWS Security Services
 [![Made with AWS Security Services](https://img.shields.io/badge/AWS-Security-blue?logo=amazon-aws)](https://aws.amazon.com/security/)
-*Made using Amazon Web Services*
+*Made using AWS*
 
 This project simulates real-world threat detection and incident response in AWS using **GuardDuty**, **CloudTrail**, **Security Hub**, and **Lambda**.
 
