@@ -28,6 +28,7 @@ This is the exact API call used to simulate the GuardDuty alert (`UnauthorizedAc
     "UnauthorizedAccess:EC2/SSHBruteForce"
   ]
 }
+```
 
 ---
 
