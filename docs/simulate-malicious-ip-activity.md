@@ -36,3 +36,13 @@ aws guardduty create-sample-findings \
 
 ![Network Interface Details](../screenshots/simulated-finding-sshbrute-network-ip.png)  
 *Private IPs, security groups, and VPC info*
+
+---
+
+## 🧠 What This Proves
+
+This simulation confirmed that GuardDuty is properly configured to detect brute-force attempts on EC2 instances. It triggered a finding using a known AWS CLI command, allowing us to test detection **without deploying any real threat**.
+
+This is an essential step before building automation with EventBridge and Lambda.
+
+---
