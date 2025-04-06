@@ -60,3 +60,9 @@ This proves that **GuardDuty is integrated and working as a threat feed**, and t
 > “I used GuardDuty’s CLI to simulate a common external attack (SSH brute-force) and confirmed that the threat was detected and forwarded to Security Hub. This validated my integration pipeline and showed how AWS-native tools can monitor, ingest, and score potential security threats in real time.”
 
 ---
+
+## ✅ What This Demonstrates
+
+Security Hub is successfully ingesting and scoring GuardDuty findings. This sets the stage for automated response using EventBridge and Lambda — creating a seamless pipeline from detection to remediation.
+
+---
