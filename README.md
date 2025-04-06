@@ -38,6 +38,30 @@ This lab demonstrates a basic security operations pipeline using:
 
 ---
 
+## 🧪 Screenshots of the Lab in Action
+
+### 🔐 GuardDuty Detection
+![GuardDuty Finding](./screenshots/simulated-finding-sshbrute-overview.png) 
+*A simulated SSH brute-force attack was detected by GuardDuty*
+
+### 📜 CloudTrail Log Analysis
+![CloudTrail Event](./screenshots/cloudtrail-create-sample-findings.png)  
+*API activity logged in CloudTrail, showing exact call made*
+
+### 🧭 Security Hub Summary Dashboard
+![Security Hub Dashboard](./screenshots/security-hub-dashboard-overview.png)  
+*Aggregated findings including simulated GuardDuty threat*
+
+### ⚡ Lambda Auto-Remediation
+![Lambda Function Code](./screenshots/lambda-auto-remediation-code.png)  
+*Python Lambda function used to respond to threats*
+
+### 🛡️ AWS Security Services
+[![Made with AWS Security Services](https://img.shields.io/badge/AWS-Security-blue?logo=amazon-aws)](https://aws.amazon.com/security/)
+*Made using Amazon Web Services*
+
+---
+
 ## 📁 Folder Structure
 
 ```
