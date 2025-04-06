@@ -49,8 +49,6 @@ Build a two‑tier VPC—public bastion up front, private subnet behind it—and
 **SSH Hop Success**  
 ![SSH Flow](screenshots/SSHPublictoPrivateSuccess.png)
 
-*If any images fail to load, please verify that the screenshots folder is in the correct relative location and that the filenames match exactly (including case sensitivity).*
-
 ---
 
 ## 📁 Folder Structure
