@@ -1,6 +1,6 @@
-# 🛡️ AWS VPC Security Lab
+# 🛡️ AWS VPC Security Lab
 
-Build a two‑tier VPC—public bastion up front, private subnet behind it—and lock everything down with Security Groups, NACLs, and Flow Logs. Hands‑on, click‑by‑click, zero fluff.
+Build a two‑tier VPC—public bastion up front, private subnet behind it—and lock it down with Security Groups, NACLs, and Flow Logs. Hands‑on, click‑by‑click, zero fluff.
 
 [![License](https://img.shields.io/github/license/chetflowers/AWS-VPC-Security?color=blue)](LICENSE)  
 [![Last Commit](https://img.shields.io/github/last-commit/chetflowers/AWS-VPC-Security)](../../commits)
@@ -16,7 +16,7 @@ Build a two‑tier VPC—public bastion up front, private subnet behind it—and
 
 ---
 
-## 🧪 Lab Tasks
+## 🧪 Lab Tasks
 - Create the VPC, subnets, route tables, and Internet Gateway  
 - Launch a bastion EC2 in the public subnet and a workload EC2 in the private subnet  
 - Attach an Elastic IP to the bastion  
@@ -29,24 +29,23 @@ Build a two‑tier VPC—public bastion up front, private subnet behind it—and
 - **VPC `10.0.0.0/16`** — your IP sandbox  
 - **Public subnet `10.0.1.0/24`** — bastion EC2, Elastic IP, SSH allowed from your IP  
 - **Private subnet `10.0.2.0/24`** — workload EC2, no direct Internet  
-- **Internet Gateway** — outbound door for the bastion (and NAT, if you add one)  
+- **Internet Gateway** — outbound door for the bastion (add NAT if private hosts need outbound)  
 - **Route table** — public subnet routes `0.0.0.0/0` to the IGW  
 - **Security Groups** — bastion‑sg (SSH from you) → private‑sg (SSH from bastion)  
 - **Network ACLs** — extra “nope” layer on the subnet edge  
-- **VPC Flow Logs** — packet receipts to CloudWatch or S3  
+- **VPC Flow Logs** — packet receipts to CloudWatch or S3  
 
 ---
 
 ## 🖼️ Screenshots
-
-### VPC Created  
+**VPC created**  
 ![VPC created](screenshots/MySecureVPCCreate.png)
 
-### Security‑Group Rules  
+**Security‑Group rules**  
 ![Public SG](screenshots/PublicSecurityGroupCreated.png)  
 ![Private SG](screenshots/PrivateSecurityGroupCreated.png)
 
-### SSH Hop Success  
+**SSH hop success**  
 ![SSH flow](screenshots/SSHPublictoPrivateSuccess.png)
 
 ---
@@ -56,7 +55,7 @@ Build a two‑tier VPC—public bastion up front, private subnet behind it—and
 AWS-VPC-Security/
 ├── README.md
 ├── cloudformation/
-│   └── vpc-bastion.yaml           # optional IaC (work in progress)
+│   └── vpc-bastion.yaml        # optional IaC (work in progress)
 ├── docs/
 │   ├── setup-guide.md
 │   ├── security-hardening.md
@@ -82,7 +81,9 @@ AWS-VPC-Security/
    ssh -i PrivateKey.pem ubuntu@<Private-EC2-Private-IP>
    ```
 
-	5.	Enable VPC Flow Logs – target CloudWatch log group, then tail the traffic
+   ---
+
+   5.	Enable VPC Flow Logs – send to a CloudWatch log group, then tail the traffic
 
 ---
 
@@ -91,20 +92,22 @@ AWS-VPC-Security/
 Scenario: You need to reach a private EC2 instance.
 	1.	SSH to the bastion using its Elastic IP.
 	2.	From the bastion, SSH to the private host’s private IP.
-	3.	Verify who and lastlog to confirm only bastion traffic hits the private box.
+	3.	Run who or lastlog to confirm only bastion traffic hits the private box.
 
 Outcome: Private instance stays invisible to the Internet; only the bastion can touch it.
 
-⸻
+---
 
 💾 Notes
-	•	The CloudFormation template is a stub; feel free to finish or swap in Terraform.
+	•	CloudFormation template is a stub—finish it or swap in Terraform if you prefer.
 	•	All how‑to docs live in /docs/; screenshots in /screenshots/.
 	•	IAM setup follows least‑privilege: separate SGs and no stored keys on servers.
 	•	Open a PR or issue if you spot a typo or have an improvement!
 
-⸻
+---
 
-License
+📝 License
 
 MIT
+
+---
