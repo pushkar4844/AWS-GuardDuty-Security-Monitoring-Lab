@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Enable GuardDuty with optional protections
+
+Resources:
+  GuardDutyDetector:
+    Type: AWS::GuardDuty::Detector
+    Properties:
+      Enable: true
+      DataSources:
+        S3Logs:
+          Enable: true
+        Kubernetes:
+          AuditLogs:
+            Enable: true
+        MalwareProtection:
+          ScanEc2InstanceWithFindings:
+            EbsVolumes:
+              Enable: true
+
+Outputs:
+  DetectorId:
+    Description: ID of the GuardDuty detector
+    Value: !Ref GuardDutyDetector
