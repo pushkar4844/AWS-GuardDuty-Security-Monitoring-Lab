@@ -1,54 +1,132 @@
-# 🛡️ AWS VPC Security Lab
+# 🛡️ AWS Threat Detection Lab
 
-Build a two‑tier VPC—public bastion up front, private subnet behind it—and lock it down with Security Groups, NACLs, and Flow Logs. Hands‑on, click‑by‑click, zero fluff.
+### 🛡️ AWS Security Services
+[![Made with AWS Security Services](https://img.shields.io/badge/AWS-Security-blue?logo=amazon-aws)](https://aws.amazon.com/security/)
+*Made using Amazon Web Services*
 
-[![License](https://img.shields.io/github/license/chetflowers/AWS-VPC-Security?color=blue)](LICENSE)  
-[![Last Commit](https://img.shields.io/github/last-commit/chetflowers/AWS-VPC-Security)](../../commits)
+This project simulates real-world threat detection and incident response in AWS using **GuardDuty**, **CloudTrail**, **Security Hub**, and **Lambda**.
+
+It showcases hands-on skills in cloud-native monitoring, threat tracing, and auto-remediation — fully documented with supporting screenshots and CLI examples.
 
 ---
 
 ## 🎯 What You'll Learn
-- Slice a VPC into **public** and **private** subnets  
-- Pin inbound SSH to a single bastion host  
-- Chain Security Groups *and* Network ACLs for layered defense  
-- Turn on VPC Flow Logs and read the receipts  
-- Troubleshoot “can’t SSH” and “no Internet” headaches  
+
+- Detect suspicious activity with **Amazon GuardDuty**
+- Trace root cause using **CloudTrail logs**
+- Centralize and prioritize alerts using **AWS Security Hub**
+- Automatically respond to threats with **Lambda** and **EventBridge**
+- Simulate IAM/network misuse to trigger alerts
+- Document your findings, troubleshooting, and remediation steps
 
 ---
 
-## 🧪 Lab Tasks
-- Create the VPC, subnets, route tables, and Internet Gateway  
-- Launch a bastion EC2 in the public subnet and a workload EC2 in the private subnet  
-- Attach an Elastic IP to the bastion  
-- Test SSH: **laptop → bastion → private host**  
-- Enable Flow Logs and watch traffic in CloudWatch  
+## 🧪 Simulated Threats
+
+- SSH Brute-force attempts on EC2
+- EC2 port scanning activity
+- IAM key use from an unapproved location
+- Logins from known Tor exit nodes
 
 ---
 
-## ⚙️ Architecture Components
-- **VPC `10.0.0.0/16`** — your IP sandbox  
-- **Public subnet `10.0.1.0/24`** — bastion EC2, Elastic IP, SSH allowed from your IP  
-- **Private subnet `10.0.2.0/24`** — workload EC2, no direct Internet  
-- **Internet Gateway** — outbound door for the bastion (add NAT if private hosts need outbound)  
-- **Route table** — public subnet routes `0.0.0.0/0` to the IGW  
-- **Security Groups** — bastion-sg (SSH from you) → private-sg (SSH from bastion)  
-- **Network ACLs** — extra “nope” layer on the subnet edge  
-- **VPC Flow Logs** — packet receipts to CloudWatch or S3  
+## 🧱 Architecture Components
+
+This lab demonstrates a basic security operations pipeline using:
+
+- **GuardDuty** to detect threats like port scans and brute-force login attempts  
+- **CloudTrail** to log and analyze API calls triggering alerts  
+- **Security Hub** to aggregate and score findings from GuardDuty and AWS Config  
+- **Lambda** for automatic remediation of specific threat types  
+- **EventBridge** to detect specific GuardDuty alerts and invoke response actions  
 
 ---
 
-## 🖼️ Screenshots
+## 🧪 Screenshots of the Lab in Action
 
-**VPC Created**  
-![VPC Created](screenshots/MySecureVPCCreate.png)
+### 🔐 GuardDuty Detection
+![GuardDuty Finding](./screenshots/simulated-finding-sshbrute-overview.png) 
+*A simulated SSH brute-force attack was detected by GuardDuty*
 
-**Security Group Rules**  
-![Public SG](screenshots/PublicSecurityGroupCreated.png)  
-![Private SG](screenshots/PrivateSecurityGroupCreated.png)
+### 📜 CloudTrail Log Analysis
+![CloudTrail Event](./screenshots/cloudtrail-create-sample-findings.png)  
+*API activity logged in CloudTrail, showing exact call made*
 
-**SSH Hop Success**  
-![SSH Flow](screenshots/SSHPublictoPrivateSuccess.png)
+### 🧭 Security Hub Summary Dashboard
+![Security Hub Dashboard](./screenshots/security-hub-dashboard-overview.png)  
+*Aggregated findings including simulated GuardDuty threat*
+
+### ⚡ Lambda Auto-Remediation
+![Lambda Function Code](./screenshots/lambda-auto-remediation-code.png)  
+*Python Lambda function used to respond to threats*
 
 ---
 
 ## 📁 Folder Structure
+
+```
+AWS-GuardDuty-Security-Monitoring-Lab/
+├── README.md
+├── cloudformation/
+│   └── guardduty-setup.yaml
+├── lambda/
+│   ├── auto-remediation.py
+│   └── auto-remediation.zip
+├── docs/
+│   ├── guardduty-setup-notes.md
+│   ├── simulate-malicious-ip-activity.md
+│   ├── cloudtrail-log-analysis.md
+│   ├── security-hub-dashboard-guide.md
+│   └── auto-remediation.md
+├── screenshots/
+│   └── [All screenshots referenced in the docs]
+```
+
+---
+
+## 🚀 How to Run the Lab
+
+1. **Enable GuardDuty** in your account (free tier includes 30 days of extended detection)
+2. Enable **S3 Protection, EC2 Malware Protection**, and others as needed
+3. Simulate threats using `aws guardduty create-sample-findings`
+4. View the alert in GuardDuty and validate the detection
+5. Trace the source in **CloudTrail logs**
+6. View the finding ingested into **Security Hub**
+7. Trigger a **Lambda function via EventBridge** to auto-remediate
+
+---
+
+## 📓 Mini Playbook: SSH Brute-Force Auto-Remediation
+
+**Scenario:** GuardDuty detects a brute-force SSH attack (`UnauthorizedAccess:EC2/SSHBruteForce`) on an EC2 instance.
+
+**Steps Taken:**
+
+1. Created a custom **Lambda function** (`auto-remediation.py`) that:
+   - Parses the GuardDuty finding
+   - Identifies the target EC2 instance
+   - Automatically applies a restrictive security group to block further access
+
+2. Created an **EventBridge rule** to listen for this specific finding type.
+
+3. Validated the Lambda was triggered successfully using CloudWatch logs.
+
+**Outcome:**
+> EC2 instance targeted by a simulated attack was **automatically isolated** within seconds of detection.
+
+---
+
+## 💾 Notes
+
+- Each detection, simulation, and remediation is documented in `/docs/`
+- Screenshots for each step are stored in `/screenshots/`
+- All code (Lambda, CLI commands) is version-controlled
+- IAM setup follows least-privilege and group-based policies
+
+---
+
+## 🧠 Interview Tip
+
+> “This lab demonstrates how to simulate threats, detect them with GuardDuty, trace the source with CloudTrail, and automatically remediate them with Lambda — all using cloud-native tools.”
+
+---
