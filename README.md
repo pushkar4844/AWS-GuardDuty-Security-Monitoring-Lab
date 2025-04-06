@@ -1,12 +1,10 @@
 # 🛡️ AWS Threat Detection Lab
 
-### 🛡️ AWS Security Services
+Simulating real-world threat detection and incident response in AWS using **GuardDuty**, **CloudTrail**, **Security Hub**, and **Lambda**.
+
+This lab showcases cloud-native monitoring, threat tracing, and auto-remediation — fully documented with CLI commands, screenshots, and infrastructure code.
+
 [![Made with AWS Security Services](https://img.shields.io/badge/AWS-Security-blue?logo=amazon-aws)](https://aws.amazon.com/security/)
-*Made using AWS*
-
-This project simulates real-world threat detection and incident response in AWS using **GuardDuty**, **CloudTrail**, **Security Hub**, and **Lambda**.
-
-It showcases hands-on skills in cloud-native monitoring, threat tracing, and auto-remediation — fully documented with supporting screenshots and CLI examples.
 
 ---
 
