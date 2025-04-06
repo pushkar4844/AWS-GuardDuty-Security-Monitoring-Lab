@@ -48,3 +48,13 @@ These layers enhance the lab's realism and demonstrate extended GuardDuty capabi
 
 ![IAM Group Policies](../screenshots/iam-group-policies.png)  
 *GuardDuty permissions assigned via group*
+
+---
+
+---
+
+## 🧠 Why It Matters
+
+Enabling GuardDuty across these services ensures a wide detection surface for real-world threats. This setup lays the groundwork for simulating attacks and watching how GuardDuty reacts — the foundation for a cloud-native defense lab.
+
+---
