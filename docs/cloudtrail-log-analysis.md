@@ -42,3 +42,11 @@ This is the exact API call used to simulate the GuardDuty alert (`UnauthorizedAc
 
 ![Event JSON - CreateSampleFindings](../screenshots/cloudtrail-create-sample-findings-json.png)  
 *Raw JSON of the CloudTrail log entry for the simulated SSH brute-force event.*
+
+---
+
+## 🧠 Why This Matters
+
+By tracing the `CreateSampleFindings` API call in CloudTrail, we confirmed that GuardDuty alerts can be correlated to actual AWS API activity. This is critical for forensic investigations, compliance audits, and building detection logic based on user actions — not just alerts alone.
+
+---
