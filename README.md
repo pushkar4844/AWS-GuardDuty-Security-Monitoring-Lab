@@ -130,3 +130,4 @@ AWS-GuardDuty-Security-Monitoring-Lab/
 > “This lab demonstrates how to simulate threats, detect them with GuardDuty, trace the source with CloudTrail, and automatically remediate them with Lambda — all using cloud-native tools.”
 
 ---
+Log entry for 2025-08-02
